@@ -1,14 +1,14 @@
 <?php
-	session_start();
 	include 'dbh.php';
+	session_start();
 	
 	if($conn->connect_error){
 		die("connection failed:" . $conn->connect_error);
 	}
 	
 	
-	$RegName = $_POST["LogName"];
-	$RegPass = $_POST["LogPassword"];
+	$RegName = mysqli_real_escape_string($conn, $_POST["LogName"]);
+	$RegPass = mysqli_real_escape_string($conn, $_POST["LogPassword"]);
 	
 	$reg = "SELECT slaptazodis from registruotivart WHERE vardas='".$RegName."' ";
 	$res = mysqli_query($conn, $reg);
@@ -20,7 +20,6 @@
 		header('Location: Prisijungimas.php?error=invalidlogin');
 	}
 	else{
-		
 		$reg = "Select * from registruotivart WHERE vardas='".$RegName."' and slaptazodis='".$hash_RegPass."' ";
 		$res=mysqli_query($conn, $reg);
 			
@@ -28,8 +27,14 @@
 			echo "ERROR";
 		}
 		else{
-			$_SESSION['vart_num'] = $reg['vart_num'];
-			header('Location: index.php');	
+			$uid = "Select vart_num from registruotivart WHERE vardas='".$RegName."' and slaptazodis='".$hash_RegPass."' ";
+			$res2 = mysqli_query($conn, $uid);
+			$reg3 = mysqli_fetch_array($res2);
+			
+			$_SESSION['vart_num'] = $reg3['vart_num'];
+			
+			
+			header('Location: index.php');
 		}
 		$conn->close();
 	}

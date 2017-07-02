@@ -1,6 +1,5 @@
-﻿<?php 
-	
-	include'dbh.php';
+<?php 
+
 	include 'Komentarai.php';
 	
 ?>
@@ -23,6 +22,42 @@
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
     <script type="text/javascript" src="js/validation.js"></script> 
 	<link rel="stylesheet" href="css/Straipsniai.css">
+	
+	<style>
+		.comm-edit-button{
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			width: 80px;
+			height: 20px;
+			color: #282828;
+			background-color: transparent;
+			border: 0;
+			opacity: 0.7;
+		}
+		.comm-edit-button:hover{
+			background-color: transparent!important;
+			opacity: 1;
+			cursor: pointer;
+		}
+		.comm-dell-button{
+			position: absolute;
+			right: 65px;
+			top: 0px;
+			width: 80px;
+			height: 20px;
+			color: #282828;
+			background-color: transparent;
+			border: 0;
+			opacity: 0.7;
+		}
+		.comm-dell-button:hover{
+			background-color: transparent!important;
+			opacity: 1;
+			cursor: pointer;
+		}
+		
+	</style>
 	
   </head>  
   
@@ -112,11 +147,14 @@
 					<div class="s-12 m-12 l-4 comment-form">
 					  <h4 class="text-uppercase text-strong">Rašykite komentarą:</h4>
 					  <form id = "komentaras" class="customform" method="post" action="'.setComments($conn).'">
-						<div class="s-12">
-							<input type="hidden" name="vartotojoVardas" value="lol"/>
+						<div class="s-12">';
+						if(isset($_SESSION['vart_num'])){
+							echo '<input type="text" name="vartotojoNumeris" value="'.$_SESSION['vart_num'].'"/>';
+						}
+						echo '
 							<textarea name="lol" id="commentText" class="required message border-radius comment" placeholder="Jūsų komentaras" rows="3"></textarea>
 						</div>
-						<div class="s-12"><button  onclick="return laukoTikrinimas()" type="submit" name="commentSubmit">Komentuoti</button></div>
+						<div class="s-12"><button  onclick="return laukoTikrinimas()" type="submit" name="commentSubmit" onClick="window.location.reload();">Komentuoti</button></div>
 					  </form>
 					  </div>
 					<hr/>

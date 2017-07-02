@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017 m. Bir 29 d. 10:09
+-- Generation Time: 2017 m. Lie 02 d. 17:07
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -103,33 +103,19 @@ CREATE TABLE `komentarai` (
   `id` int(11) NOT NULL,
   `Komentaras` varchar(10000) NOT NULL,
   `Vartotojo_vardas` varchar(30) DEFAULT NULL,
-  `Laikas` datetime DEFAULT NULL
+  `Laikas` datetime DEFAULT NULL,
+  `vartot_num` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Sukurta duomenų kopija lentelei `komentarai`
 --
 
-INSERT INTO `komentarai` (`id`, `Komentaras`, `Vartotojo_vardas`, `Laikas`) VALUES
-(17, 'asdadsa', 'lol', '2017-06-05 17:29:22'),
-(18, 'qweqwe', 'lol', '2017-06-05 17:38:26'),
-(19, 'qweqeqeqweqwe', 'lol', '2017-06-05 17:38:29'),
-(20, 'qewqeqweqe', 'lol', '2017-06-05 17:38:31'),
-(21, 'qeweqeqeqwew', 'lol', '2017-06-05 17:38:33'),
-(22, '', '', '2017-06-05 17:48:07'),
-(23, 'fsdsfsdfsdsf', 'lol', '2017-06-05 18:17:06'),
-(24, 'dasdasdasdasd', 'lol', '2017-06-05 18:17:57'),
-(25, 'asdasd', 'lol', '2017-06-05 18:18:40'),
-(26, 'sadaas', 'lol', '2017-06-05 18:19:21'),
-(27, 'gssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss', 'lol', '2017-06-05 19:14:41'),
-(28, 'Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best Best', 'lol', '2017-06-05 19:16:19'),
-(29, 'asdffdsasf\r\n\r\n\r\n\r\nafsafasdfas', 'lol', '2017-06-05 19:54:05'),
-(30, '', 'lol', '2017-06-05 20:24:00'),
-(31, '', 'lol', '2017-06-05 20:26:43'),
-(32, '', 'lol', '2017-06-05 20:27:59'),
-(33, '', 'lol', '2017-06-05 20:29:33'),
-(34, '', 'lol', '2017-06-05 20:29:40'),
-(35, 'czcxczccxzx', 'lol', '2017-06-05 22:10:06');
+INSERT INTO `komentarai` (`id`, `Komentaras`, `Vartotojo_vardas`, `Laikas`, `vartot_num`) VALUES
+(2, '1zxc', 'lol', '2017-07-01 17:29:49', 14),
+(3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.', 'lol', '2017-07-01 17:56:24', 10),
+(32, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.', NULL, '2017-07-02 20:04:39', 14),
+(33, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies non tellus ut consectetur. Maecenas sagittis pellentesque sollicitudin.', NULL, '2017-07-02 20:04:46', 14);
 
 -- --------------------------------------------------------
 
@@ -181,6 +167,28 @@ INSERT INTO `registruotivart` (`Vardas`, `El_pastas`, `Slaptazodis`, `Reg_data`,
 ('lol', 'lol', '$2y$10$zwjyPOKcUbEYfsHisodM0uUBqhc.wW/caCSkXU8uNsjHvqP7jaHKm', '2017-06-03', '::1', 10),
 ('iki', 'iki', '$2y$10$rb3p8hz9LSnoevdshWob/ubZIrBw8YGDKSaJ1lReL51hBQ.T6TMBW', '2017-06-03', '::1', 13);
 
+-- --------------------------------------------------------
+
+--
+-- Sukurta duomenų struktūra lentelei `straipsniai`
+--
+
+CREATE TABLE `straipsniai` (
+  `Straipsnio_id` int(11) NOT NULL,
+  `Tekstas` text CHARACTER SET utf8 NOT NULL,
+  `Antraste` varchar(300) CHARACTER SET utf8 COLLATE utf8_lithuanian_ci NOT NULL,
+  `Nuotrauka` varchar(300) NOT NULL,
+  `Autorius` varchar(100) CHARACTER SET utf8 COLLATE utf8_lithuanian_ci NOT NULL,
+  `Data` datetime NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Sukurta duomenų kopija lentelei `straipsniai`
+--
+
+INSERT INTO `straipsniai` (`Straipsnio_id`, `Tekstas`, `Antraste`, `Nuotrauka`, `Autorius`, `Data`) VALUES
+(4, 'Tapti suaugusiu reiškia išmokti surasti pusiausvyrą tarp šeimos gyvenimo ir karjeros. Elektroninis paštas, išmanieji telefonai bei socialiniai tinklai šią liniją dar labiau ištirpdo. Naujausias režisieriaus Mark Williams filmas „Šeimos žmogus“ (angl. „A Family Man“) pasakoja istoriją, kurią esame girdėję daug kartų, tačiau tai paliečia vis daugiau ir daugiau šiuolaikinių darboholikų.\r\n\r\nĮtaigioje dramoje „Šeimos žmogus“ pagrindinį karjeristo Deino vaidmenį atlieka aktorius Gerard Butler, išgarsėjęs tokiuose gryno testosterono veiksmo filmuose kaip „300“ ir „Olimpo apgultis“. Daugelis kino fanų išgirdę G. Butler vardą automatiškai tikisi dar vieno Amerikos herojaus filmo, tačiau kiekvienam aktoriui ateina metas parodyti savo aktorinius sugebėjimus jaudinančioje dramoje.\r\n\r\nFilme pasakojama apie Deiną, kuris užuot leidęs laiką su šeima, mieliau renkasi darbą. Dirbdamas sėkmingoje Čikagos talentų paieškos kompanijoje, talentų medžiotojas siekia užimti kompanijos vadovo vairą. Tačiau viskas staiga pasikeičia, kai šį paaukštinimą aptemdo netikėta žinia iš namų.\r\n\r\nFilmas „Šeimos žmogus“ yra M. Williams, kaip režisieriaus, debiutas. Režisierius M. Williams išgarsėjo prodiusuodamas 2016 metų trilerį „Sąskaitininkas“ (vaidina Ben Affleck). Nenuostabu, kad į naują projektą kartu su savimi atsiviliojo ir „Sąskaitininko“ scenarijaus autorių Bill Dubuque. Filme taip pat vaidina Holivudo žvaigždės Willem Dafoe, Alison Brie, Gretchen Mol ir kiti.\r\n\r\nJaudinanti drama „Šeimos žmogus“ kinuose nuo birželio 23 d.', 'Gryno testosterono filmų aktorius Gerard Butler debiutuoja dramoje „Šeimos žmogus“', 'img/familyman.jpg', 'Autorius1', '2017-06-30 00:00:00');
+
 --
 -- Indexes for dumped tables
 --
@@ -218,6 +226,12 @@ ALTER TABLE `registruotivart`
   ADD UNIQUE KEY `El_pastas` (`El_pastas`);
 
 --
+-- Indexes for table `straipsniai`
+--
+ALTER TABLE `straipsniai`
+  ADD PRIMARY KEY (`Straipsnio_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -235,7 +249,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `komentarai`
 --
 ALTER TABLE `komentarai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `member`
 --
@@ -246,6 +260,11 @@ ALTER TABLE `member`
 --
 ALTER TABLE `registruotivart`
   MODIFY `Vart_num` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `straipsniai`
+--
+ALTER TABLE `straipsniai`
+  MODIFY `Straipsnio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

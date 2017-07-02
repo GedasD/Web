@@ -1,7 +1,7 @@
 <?php 
 	
-	include'dbh.php';
 	include 'Komentarai.php';
+
 	
 ?>
 <!DOCTYPE html>
@@ -23,6 +23,12 @@
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
     <script type="text/javascript" src="js/validation.js"></script> 
 	<link rel="stylesheet" href="css/Straipsniai.css">
+	<style>
+		.CommentEdit{
+			width: 800px !important;
+			min-height: 400px !important;
+		}
+	</style>
 	
   </head>  
   
@@ -73,7 +79,7 @@
 				</li>
               <li class="hoverRaudona"><a href="gallery.php">Galerija</a></li>
               <li class="hoverRaudona"><a href="about.php">Apie mus</a></li>
-              <li class="hoverRaudona"><a href="contact.php">Kontaktinë informacija</a></li>
+              <li class="hoverRaudona"><a href="contact.php">KontaktinÄ— informacija</a></li>
             </ul>
           </div>
         </div>
@@ -88,38 +94,25 @@
 		<div class="paveikslelis">
 		</div>
 		<div class="content">
-			<article>
-				<div class="data melyna" >2017-05-09</div>
-				<p><h1 class="pavadinimas">Gryno testosterono filmø aktorius Gerard Butler debiutuoja dramoje „Ğeimos şmogus“</h1></p>
-			  
-				<p><img src="img/familyman.jpg" class="AntrastesNuotrauka"/> Tapti suaugusiu reiğkia iğmokti surasti pusiausvyrà tarp ğeimos gyvenimo ir karjeros. Elektroninis pağtas, iğmanieji telefonai bei socialiniai tinklai ğià linijà dar labiau iğtirpdo. Naujausias reşisieriaus Mark Williams filmas „Ğeimos şmogus“ (angl. „A Family Man“) pasakoja istorijà, kurià esame girdëjæ daug kartø, taèiau tai palieèia vis daugiau ir daugiau ğiuolaikiniø darboholikø.<p>
-
-				<p>Átaigioje dramoje „Ğeimos şmogus“ pagrindiná karjeristo Deino vaidmená atlieka aktorius Gerard Butler, iğgarsëjæs tokiuose gryno testosterono veiksmo filmuose kaip „300“ ir „Olimpo apgultis“. Daugelis kino fanø iğgirdæ G. Butler vardà automatiğkai tikisi dar vieno Amerikos herojaus filmo, taèiau kiekvienam aktoriui ateina metas parodyti savo aktorinius sugebëjimus jaudinanèioje dramoje.</p>	
-
-				<p>Filme pasakojama apie Deinà, kuris uşuot leidæs laikà su ğeima, mieliau renkasi darbà. Dirbdamas sëkmingoje Èikagos talentø paieğkos kompanijoje, talentø medşiotojas siekia uşimti kompanijos vadovo vairà. Taèiau viskas staiga pasikeièia, kai ğá paaukğtinimà aptemdo netikëta şinia iğ namø.</p>
-
-				<p>Filmas „Ğeimos şmogus“ yra M. Williams, kaip reşisieriaus, debiutas. Reşisierius M. Williams iğgarsëjo prodiusuodamas 2016 metø trilerá „Sàskaitininkas“ (vaidina Ben Affleck). Nenuostabu, kad á naujà projektà kartu su savimi atsiviliojo ir „Sàskaitininko“ scenarijaus autoriø Bill Dubuque. Filme taip pat vaidina Holivudo şvaigşdës Willem Dafoe, Alison Brie, Gretchen Mol ir kiti.</p>
-
-				<p>Jaudinanti drama „Ğeimos şmogus“ kinuose nuo birşelio 23 d.</p><hr/>
-				<p>Straipsnis yra paimtas iğ <a href="http://www.forumcinemas.lt/">ForumCinemas.lt</a> portalo<br>
-				<a href="http://www.forumcinemas.lt/News/1005-Kino-naujienos/2017-05-19/3114/Gryno-testosterono-filmu-aktorius-Gerard-Butler-debiutuoja-dramoje-Seimos-zmogus/">Prieiga prie straipsnio per internetà.</a></p>    
-				</article>
-				
 				<?php
+				
+				
 					echo'
 					<div class="comment-section">
-					<h2 class = "komentaru-antraste">Komentarø skiltis</h2><hr/>
+					<h2 class = "komentaru-antraste">Comment Edit</h2><hr/>
 					<div class="s-12 m-12 l-4 comment-form">
-					  <h4 class="text-uppercase text-strong">Rağykite komentarà:</h4>
-					  <form id = "komentaras" class="customform" method="post" action="'.setComments($conn).'">
+					  <h4 class="text-uppercase text-strong">Komentaro taisymas:</h4>
+					  <form id = "komentaras" class="customform" method="post" action="'.editComments($conn).'">
 						<div class="s-12">
 							<input type="hidden" name="vartotojoVardas" value="lol"/>
-							<textarea name="lol" id="commentText" class="required message border-radius comment" placeholder="Jûsø komentaras" rows="3"></textarea>
+							<input type="hidden" name="id" value="'.$_POST['id'].'">
+							<textarea name="tekstas" id="commentText" class="required message border-radius comment CommentEdit" placeholder="JÅ«sÅ³ komentaras" rows="3">'.$_POST['Komentaras'].'</textarea>
 						</div>
-						<div class="s-12"><button  onclick="return laukoTikrinimas()" type="submit" name="commentSubmit">Komentuoti</button></div>
+						<div class="s-12"><button  onclick="return laukoTikrinimas()" type="submit" name="commentSubmit">Taisyti</button></div>
 					  </form>
 					  </div>
 					<hr/>
+					
 					
 					</div>';
 					
@@ -144,17 +137,17 @@
           <div class="margin">
             <!-- Collumn 1 -->
             <div class="s-12 m-12 l-4 margin-m-bottom-2x">
-              <h4 class="text-uppercase text-strong">Mûsø ğûkis</h4>
-              <p class="text-size-20"><em>Gyvenimas be filmø - neámanomas.</em><p>
+              <h4 class="text-uppercase text-strong">MÅ«sÅ³ Å¡Å«kis</h4>
+              <p class="text-size-20"><em>Gyvenimas be filmÅ³ - neÄ¯manomas.</em><p>
                             
               <div class="line">
-                <h4 class="text-uppercase text-strong margin-top-30">Apie kompanijà</h4>
+                <h4 class="text-uppercase text-strong margin-top-30">Apie kompanijÄ…</h4>
                 <div class="margin">
                   <div class="s-12 m-12 l-4 margin-m-bottom">
                     <a class="image-hover-zoom" href="/"><img src="img/blog-04.jpg" alt=""></a>
                   </div>
                   <div class="s-12 m-12 l-8 margin-m-bottom">
-                    <p>Per ilgà gyvavimo laika turime tukstanèius patenkintø klientø.</p>
+                    <p>Per ilgÄ… gyvavimo laika turime tukstanÄius patenkintÅ³ klientÅ³.</p>
                     <a class="text-more-info text-primary-hover" href="/">Skaityti daugiau</a>
                   </div>
                 </div>
@@ -169,7 +162,7 @@
                   <i class="icon-placepin text-primary text-size-12"></i>
                 </div>
                 <div class="s-11 m-11 l-11 margin-bottom-10">
-                  <p><b>Adresas:</b> Ulonø g.5, Vilnius</p>
+                  <p><b>Adresas:</b> UlonÅ³ g.5, Vilnius</p>
                 </div>
               </div>
               <div class="line">
@@ -177,7 +170,7 @@
                   <i class="icon-mail text-primary text-size-12"></i>
                 </div>
                 <div class="s-11 m-11 l-11 margin-bottom-10">
-                  <p><a href="/" class="text-primary-hover"><b>El.pağtas:</b>info@lgd.lt</a></p>
+                  <p><a href="/" class="text-primary-hover"><b>El.paÅ¡tas:</b>info@lgd.lt</a></p>
                 </div>
               </div>
               <div class="line">
